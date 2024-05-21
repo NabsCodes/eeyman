@@ -1,0 +1,13 @@
+<% if(messages.success && messages.success.length) {%>
+<div class="alert alert-success alert-dismissible fade show flashAlert" role="alert">
+  <%= messages.success %>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<% } %>
+<!-- ***** -->
+<% if(messages.error && messages.error.length) {%>
+<div class="alert alert-danger alert-dismissible fade show flashAlert" role="alert">
+  <%= messages.error %>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<% } %>

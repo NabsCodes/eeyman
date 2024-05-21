@@ -1,0 +1,42 @@
+html,
+body {
+	height: 100%;
+	background-color: #1d1d1d
+}
+
+.toggle-password {
+	cursor: pointer;
+}
+
+.small-text {
+  font-size: 0.9em; 
+}
+.form-color {
+	background-color: #f5f5f5;
+}
+.login-color {
+	background-color: #707070;
+}
+.form-signin {
+	max-width: 330px;
+	padding: 1rem;
+}
+
+.form-signin .form-floating:focus-within {
+	z-index: 2;
+}
+
+.form-signin input[type="email"] {
+	margin-bottom: -1px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+	margin-bottom: 10px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+.footer-fs {
+	font-size: 14px;
+}
