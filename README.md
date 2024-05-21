@@ -1,4 +1,4 @@
-# � Eeyman Photography
+# 📸 Eeyman Photography
 
 ## 🌐 Overview
 
@@ -6,9 +6,9 @@ This is a website developed for [**Eeyman**](#). It showcases Eeyman's stunning 
 
 ## ⭐ Features
 
-- �️ Browse Eeyman's portfolio of photographs
-- �️ Purchase prints directly from the website
-- � Keep up to date with Eeyman's latest work and exhibitions
+- 🖼️ Browse Eeyman's portfolio of photographs
+- 🛍️ Purchase prints directly from the website
+- 📞 Keep up to date with Eeyman's latest work and exhibitions
 - 💌 Contact Eeyman for bookings or inquiries
 
 ## 🚀 Usage
