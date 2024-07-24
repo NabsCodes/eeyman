@@ -4,7 +4,7 @@
 		<meta charset="utf-8" />
 		<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-		<title><%= title %> | Eeyman</title>
+		<title><%= title %></title>
 		<meta content="" name="description" />
 		<meta content="" name="keywords" />
 
@@ -30,13 +30,9 @@
 		<link href="/assets/css/main.css" rel="stylesheet" />
 	</head>
 
-	<body class="min-vh-100">
+	<body>
 		<!-- Body content -->
 		<%- body %>
-		<!-- Footer partial -->
-		<%- include('../partials/footer-main.ejs') %>
-
-		<a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 		<div id="preloader">
 			<div class="line"></div>
@@ -51,6 +47,5 @@
 
 		<!-- JS Files -->
 		<script src="/assets/js/main.js"></script>
-		<script src="/assets/js/updateYear.js"></script>
 	</body>
 </html>

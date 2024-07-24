@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const resetMail = require('../services/resetPasswordEmail');
 const User = require('../models/user');
+require('dotenv').config();
 
 // Function to handle user registration
 const register = async (req, res) => {
@@ -37,30 +38,13 @@ const register = async (req, res) => {
 	}
 };
 
-// Function to render the register page
-const renderRegister = (req, res) => {
-	try {
-		// // If user is already logged in, redirect to home
-		// if (req.cookies.token) {
-		// 	return res.status(200).redirect('/');
-		// }
-
-		// Render the login page
-		res.render('admin/auth/register', { title: 'Register' });
-	} catch (error) {
-		// Log any errors and send error response
-		console.log(error.message);
-		res.status(500).send('Error Rendering Register Page');
-	}
-};
-
 // Function to render the login page
 const renderLogin = (req, res) => {
 	try {
-		// // If user is already logged in, redirect to home
-		// if (req.cookies.token) {
-		// 	return res.status(200).redirect('/');
-		// }
+		// If user is already logged in, redirect to home
+		if (req.cookies.token) {
+			return res.status(200).redirect('/admin/dashboard');
+		}
 
 		// Render the login page
 		res.render('admin/auth/login', { title: 'Admin Login' });
@@ -112,7 +96,7 @@ const handleLogin = async (req, res) => {
 		req.flash('success', 'Logged in successfully!');
 
 		// Redirect to the original URL the user was trying to access, or to home if no original URL stored
-		const redirectUrl = req.session.returnTo || '/';
+		const redirectUrl = req.session.returnTo || '/admin/dashboard';
 		delete req.session.returnTo; // Clear the returnTo from the session
 		res.status(200).redirect(redirectUrl);
 	} catch (error) {
@@ -245,7 +229,6 @@ const renderResetPassword = (req, res) => {
 
 module.exports = {
 	register,
-	renderRegister,
 	renderLogin,
 	handleLogin,
 	logout,

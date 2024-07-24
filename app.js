@@ -6,18 +6,21 @@ const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 const ejsMate = require('ejs-mate');
 const methodOverride = require('method-override');
+const ExpressError = require('./utils/ExpressError');
 const errorHandler = require('./middlewares/errorHandler');
 require('dotenv').config();
 
 // Import routers
 const userRouter = require('./router/userRouter');
 const homeRouter = require('./router/homeRouter');
+const adminRouter = require('./router/adminRouter');
 
 // MongoDB Connection Setup check if in production or development
 const dbUri = process.env.NODE_ENV === 'production' ? process.env.MONGODB_URI : 'mongodb://localhost:27017/eeyman';
-mongoose.connect(dbUri)
+mongoose
+	.connect(dbUri)
 	.then(() => console.log('Connected to DB!'))
-	.catch(error => console.log(`Error Connecting to Mongo: ${error.message}`));
+	.catch((error) => console.log(`Error Connecting to Mongo: ${error.message}`));
 
 // Set up Mongoose connection event handlers
 const db = mongoose.connection;
@@ -46,30 +49,34 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Use middleware for session and flash messages
-app.use(session({
-	secret: process.env.SESSION_SECRET,
-	resave: false,
-	saveUninitialized: true,
-	cookie: { secure: false }
-}));
+app.use(
+	session({
+		secret: process.env.SESSION_SECRET,
+		resave: false,
+		saveUninitialized: true,
+		cookie: { secure: false },
+	})
+);
 app.use(flash());
 
-// Middleware to pass flash messages to all views 
+// Middleware to pass flash messages to all views
 app.use((req, res, next) => {
 	res.locals.messages = req.flash(); // Pass flash messages to all views
+	res.locals.returnTo = req.session.returnTo; // Pass the returnTo URL to all views
 	next();
 });
 
 app.use('/', homeRouter);
-app.use('/', userRouter);
+app.use('/admin', userRouter);
+app.use('/admin', adminRouter);
 
 // Catch All Route for 404 Errors
-// app.all('*', (_req, _res, next) => {
-// 	next(new ExpressError('Page Not Found', 404)); // Pass error to error handling middleware
-// });
+app.all('*', (_req, _res, next) => {
+	next(new ExpressError('Page Not Found', 404)); // Pass error to error handling middleware
+});
 
 // Error Handling Middleware
-// app.use(errorHandler);
+app.use(errorHandler);
 
 // Start the server on the specified port
 const port = process.env.PORT;
